@@ -1,0 +1,5 @@
+gcc -c sort.c
+gcc -o sort sort.o
+
+[0;32m#### make completed successfully  ####[00m
+

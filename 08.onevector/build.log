@@ -1,0 +1,30 @@
+gcc -o main main.o
+main.o: In function `main':
+main.cpp:(.text+0x37): undefined reference to `std::cin'
+main.cpp:(.text+0x3c): undefined reference to `std::basic_istream<char, std::char_traits<char> >::operator>>(int&)'
+main.cpp:(.text+0x51): undefined reference to `std::basic_ios<char, std::char_traits<char> >::operator void*() const'
+main.cpp:(.text+0x7a): undefined reference to `std::cout'
+main.cpp:(.text+0x7f): undefined reference to `std::basic_ostream<char, std::char_traits<char> >::operator<<(int)'
+main.cpp:(.text+0x8c): undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)'
+main.cpp:(.text+0xad): undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)'
+main.cpp:(.text+0xb2): undefined reference to `std::cout'
+main.cpp:(.text+0xb7): undefined reference to `std::basic_ostream<char, std::char_traits<char> >::operator<<(std::basic_ostream<char, std::char_traits<char> >& (*)(std::basic_ostream<char, std::char_traits<char> >&))'
+main.cpp:(.text+0xc1): undefined reference to `std::cout'
+main.cpp:(.text+0xc6): undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::operator<< <std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&, char const*)'
+main.cpp:(.text+0xe7): undefined reference to `std::cout'
+main.cpp:(.text+0xec): undefined reference to `std::basic_ostream<char, std::char_traits<char> >::operator<<(int)'
+main.cpp:(.text+0xf1): undefined reference to `std::basic_ostream<char, std::char_traits<char> >& std::endl<char, std::char_traits<char> >(std::basic_ostream<char, std::char_traits<char> >&)'
+main.cpp:(.text+0xf9): undefined reference to `std::basic_ostream<char, std::char_traits<char> >::operator<<(std::basic_ostream<char, std::char_traits<char> >& (*)(std::basic_ostream<char, std::char_traits<char> >&))'
+main.o: In function `__static_initialization_and_destruction_0(int, int)':
+main.cpp:(.text+0x154): undefined reference to `std::ios_base::Init::Init()'
+main.cpp:(.text+0x159): undefined reference to `std::ios_base::Init::~Init()'
+main.o: In function `Vector<int>::Vector(int)':
+main.cpp:(.text._ZN6VectorIiEC2Ei[_ZN6VectorIiEC5Ei]+0x36): undefined reference to `operator new[](unsigned long)'
+main.o: In function `Vector<int>::~Vector()':
+main.cpp:(.text._ZN6VectorIiED2Ev[_ZN6VectorIiED5Ev]+0x25): undefined reference to `operator delete[](void*)'
+main.o: In function `Vector<int>::reserve(int)':
+main.cpp:(.text._ZN6VectorIiE7reserveEi[Vector<int>::reserve(int)]+0x37): undefined reference to `operator new[](unsigned long)'
+main.cpp:(.text._ZN6VectorIiE7reserveEi[Vector<int>::reserve(int)]+0xa2): undefined reference to `operator delete[](void*)'
+main.o:(.eh_frame+0x13): undefined reference to `__gxx_personality_v0'
+collect2: ld returned 1 exit status
+make: *** [main] Error 1

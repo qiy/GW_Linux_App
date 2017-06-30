@@ -38,6 +38,7 @@ int main()
 //        } 
     printf("test start\n");
     List_Reverse(list);
+//    List_Reverse2(list);
     p = list; 
    printf("----------------p:%p\n",p);
 //       printf("-------反转后的节点值为%d,addr:%p\n",Retrieve(p),p);  

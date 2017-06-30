@@ -239,3 +239,16 @@ void List_Reverse(List L)
         }  
     L->next = first; 
 }
+
+void List_Reverse2(List L)
+{
+    if(L->next == NULL) return;
+    List p = L,pre = NULL;
+    while(p != NULL)
+    {
+        List temp = p->next;
+        p->next = pre;
+        pre = p;
+        p = temp;
+    }
+}

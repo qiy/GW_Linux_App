@@ -8,11 +8,12 @@ Position MakeNode(Item i)
     p = (PNode)malloc(sizeof(Node));  
     if(p!=NULL)  
     {  
-           p->data = i;  
-           p->previous = NULL;  
-           p->next = NULL;  
-        }     
-    return p;  
+       p->data = i;  
+       p->previous = NULL;  
+       p->next = NULL;  
+       return p;  
+    } 
+    else return NULL;    
 }  
 /*释放p所指的节点*/  
 void FreeNode(PNode p)  
@@ -24,12 +25,13 @@ DList * InitList()
 {  
     DList *plist = (DList *)malloc(sizeof(DList));  
     PNode head = MakeNode(0);   
+    PNode tail = MakeNode(0);   
     if(plist!=NULL)  
     {  
            if(head!=NULL)  
            {  
                       plist->head = head;  
-                      plist->tail = head;  
+                      plist->tail = tail;  
                       plist->size = 0;  
                    }  
            else  
@@ -61,12 +63,12 @@ void ClearList(DList *plist)
     p = GetTail(plist);  
     while(!IsEmpty(plist))  
     {     
-           temp = GetPrevious(p);  
-           FreeNode(p);  
-           p = temp;  
-           plist->tail = temp;  
-           plist->size--;  
-        }  
+       temp = GetPrevious(p);  
+       FreeNode(p);  
+       p = temp;  
+       plist->tail = temp;  
+       plist->size--;  
+    }  
 }  
   
 /*返回头节点地址*/  
@@ -214,13 +216,79 @@ void ListTraverse(DList *plist,void (*visit)())
         exit(0);  
     else  
     {  
-             
-           while(p!=NULL)  
-//           while(p->next!=NULL)  
-           { 
-               visit(p->data);   
-                      p = p->next;  
-                               
-                   }         
-        }  
+        while(p->next!=NULL)  
+        {  
+            p = p->next;  
+            visit(p->data);            
+        }         
+    }  
+}
+
+//void List_Reverse(DList *L)  
+//{  
+//    if(L->head->next == NULL) return;
+//    PNode p = L->head->next,first =  L->head->next;
+//    while( (p != NULL)&&(p->next != NULL) )
+//    {
+//        PNode 
+//    }
+//    if (L->next == NULL) return;  
+//    List p = L->next, first = L->next; 
+//    while (p != NULL && p->next != NULL) {  
+//           List temp = p->next;  
+//           p->next = temp->next;  
+//           temp->next = first;  
+//           first = temp; 
+//        }  
+//    L->next = first; 
+//}
+
+PNode DList_Reverse2(DList *L)
+{
+    PNode p = L->head,pre = NULL;
+    printf("lynn tast:PNode p = L->head,pre = NULL;\n");
+    if(p == NULL) return pre;
+    printf("lynn tast:PNode p != NULL;\n");
+    while(p != NULL)
+    {
+        PNode temp = p->next;
+        p->previous = temp;
+        p->next = pre;
+        pre = p;
+        p = temp;
+    }
+   return pre; 
+//    if(L->next == NULL) return;
+//    List p = L,pre = NULL;
+//    while(p != NULL)
+//    {
+//        List temp = p->next;
+//        p->next = pre;
+//        pre = p;
+//        p = temp;
+//    }
+}
+
+PNode DList_Reverse3(DList *L)
+{
+    PNode p = L->head,pre = NULL;
+    if(L->head == NULL) return pre;
+    while(p)
+    {
+        PNode temp = p->next;
+        p->previous = temp;
+        p->next = pre;
+        pre = p;
+        p = temp;
+    }
+   return pre; 
+//    if(L->next == NULL) return;
+//    List p = L,pre = NULL;
+//    while(p != NULL)
+//    {
+//        List temp = p->next;
+//        p->next = pre;
+//        pre = p;
+//        p = temp;
+//    }
 }

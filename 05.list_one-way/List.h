@@ -80,6 +80,7 @@ Item Retrieve(Position P);
  * */ 
 
 void List_Reverse(List L); 
+void List_Reverse2(List L); 
 /*
  * 功能 
  * 链表L反转 

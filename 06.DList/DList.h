@@ -3,17 +3,15 @@
 typedef  int Item;  
 typedef struct Node * PNode;  
 typedef PNode Position;  
-/*定义节点类型*/ 
-
-//typedef struct Node  
-typedef struct   
+/*定义节点类型*/  
+typedef struct Node  
 {  
     Item data;      /*数据域*/  
     PNode previous; /*指向前驱*/  
     PNode next;     /*指向后继*/  
 }Node;  
 /*定义链表类型*/  
-typedef struct  
+typedef struct dlist 
 {  
     PNode head;     /*指向头节点*/  
     PNode tail;     /*指向尾节点*/  
@@ -75,5 +73,7 @@ PNode InsAfter(DList *plist,Position p,PNode s);
 PNode LocatePos(DList *plist,int i);  
   
 /*依次对链表中每个元素调用函数visit()*/  
-void ListTraverse(DList *plist,void (*visit)());  
+void ListTraverse(DList *plist,void (*visit)()); 
+
+PNode DList_Reverse2(DList *L);
 #endif

@@ -1,0 +1,6 @@
+MKT_CONVERT:MKT_CONVERT.o
+	gcc -o MKT_CONVERT MKT_CONVERT.o -lm 
+MKT_CONVERT.o:MKT_CONVERT.c
+	gcc -c MKT_CONVERT.c -std=c99
+clean:
+	rm -f *.o MKT_CONVERT

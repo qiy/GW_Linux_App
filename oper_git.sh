@@ -37,17 +37,17 @@ git_merge()
 			echo "继续提交"
 			git add --all
 			echo "输入提交信息:"
-			echo "1:添加-修改脚本"
-			echo "2:添加-修改工具模块"
-			echo "3:修改、添加文档"
+			echo "1:添加-修改:脚本"
+			echo "2:添加-修改:工具模块"
+			echo "3:修改-添加:文档"
 			echo "其他：自由编写commit信息"
 			read Buf_commit
             if [ 1 == "$Buf_commit" ];then
-                git commit -m "修改驱动文件"
+                git commit -m "添加-修改:脚本"
             elif [ 2 == "$Buf_commit" ];then
-                git commit -m "添加驱动模块"
+                git commit -m "添加-修改:工具模块"
             elif [ 3 == "$Buf_commit" ];then
-                git commit -m "修改、添加文档" 
+                git commit -m "修改-添加:文档" 
             else 
                 git commit -m "$Buf_commit"
             fi

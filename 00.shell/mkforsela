@@ -1,0 +1,66 @@
+#!/bin/bash
+#sela.gao
+#2016.10.12
+#History:
+#	1.根据每行查找出来的结果push进去手机
+#result:
+#      1:没有编译生成文件
+#      2:没有设置编译环境
+echoMsg(){
+    echo "$1"
+    exit $2
+}
+source build/envsetup.sh > /dev/null
+if [ $# -lt 0 ];then
+    echoMsg "参数不对，只能输入一个参数" 4
+fi
+if [ ! -e $1 ];then
+    echoMsg "$1 不存在，无法编译" 5
+fi
+lsResult=`ls $1 | grep "Android.mk"`
+echo "lsResult $lsResult"
+if [ -z $lsResult ];then
+    echoMsg "$1下面没有mk文件，没办法编译" 6
+fi
+param=$1
+processname=`echo ${param##*/}`
+if [ -z $processname ];then
+    processname=`echo ${param%*/}`
+    processname=`echo ${processname##*/}`
+fi
+echo "final:$processname"
+`mmm $1> mm.log`
+grepResult=`cat mm.log | grep Install | cut -d " " -f 2`
+echo "grepResult:$grepResult"
+if [ -z "$grepResult" ];then
+    echoMsg "本次编译没有生成文件！！！" 1
+fi
+if [ -z "$TARGET_PRODUCT" ];then
+    echoMsg "还没有设置编译项目" 2
+fi
+product=`echo ${TARGET_PRODUCT} | cut -d "_" -f 2`
+if [ -z "$product" ];then
+    echoMsg "编译环境有问题" 3
+fi
+echo "TOP:${ANDROID_BUILD_TOP}"
+echo "PRODUCT:${TARGET_PRODUCT}"
+adb root
+adb remount
+for ONELINE in $grepResult
+do
+    filename=`echo $ONELINE | sed 's/out\/target\/product\/[a-z][0-9][0-9][0-9][0-9]\///g'`
+    echo "filename:$filename"
+    echo "ONELINE:$ONELINE"
+    if [ ! -z "$ONELINE" -a ! -z "$filename" ];then
+        pushResult=`adb push "$ONELINE" "$filename"`
+        echo $pushResult	
+    fi
+done
+processname=`echo $processname | tr '[A-Z]' '[a-z]'`
+echo "::::::$processname"
+containsPackage=`echo $1 | grep "packages"`
+echo $containsPackage
+if [ -z `echo $1 | grep "package"` ];then
+    echoMsg "这个可能编译的是库文件，不kill进程" 7
+fi
+killphoneprocess $processname
